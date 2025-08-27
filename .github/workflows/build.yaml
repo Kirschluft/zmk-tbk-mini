@@ -1,7 +1,40 @@
-name: Build ZMK firmware
+name: Build ZMK firmware and Update Release
 
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      archive_name: firmware
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    name: Create or Update Release and Upload Firmware
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download firmware artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: firmware
+          path: firmware-artifacts
+
+      - name: Zip Firmware Files
+        run: |
+          cd firmware-artifacts/
+          zip -r firmware.zip .
+          
+      - name: Create or Update Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: firmware-artifacts/firmware.zip
+          asset_name: firmware.zip
+          tag: latest
+          overwrite: true
+          body: "This release contains the latest firmware build."
