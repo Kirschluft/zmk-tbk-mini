@@ -37,7 +37,7 @@
             //                     | ESC  | SPC  | TAB  |    | RET  | BSPC | DEL |
 
             bindings = <
-&none          &kp Q           &kp W           &kp E        &kp R             &kp T          &mt RA(S) Y  &mt RA(Y) U        &mt RA(Q) I        &mt RA(P) O     &kp P                    &kp DOUBLE_QUOTES
+&kp DELETE     &kp Q           &kp W           &kp E        &kp R             &kp T          &mt RA(S) Y  &mt RA(Y) U        &mt RA(Q) I        &mt RA(P) O     &kp P                    &kp DOUBLE_QUOTES
 &kp LC(Z)      &mt LEFT_GUI A  &mt LEFT_ALT S  &mt LCTRL D  &mt LEFT_SHIFT F  &kp G          &kp H        &mt RIGHT_SHIFT J  &mt RCTRL K        &mt LEFT_ALT L  &mt RIGHT_GUI SEMICOLON  &kp SQT
 &kp LC(LS(Z))  &kp Z           &kp X           &kp C        &kp V             &kp B          &kp N        &kp M              &kp COMMA          &kp DOT         &kp FSLH                 &kp EXCLAMATION
                                                &lt 3 ESC    &lt 1 TAB         &lt 2 SPACE    &lt 5 RET    &lt 4 BSPC         &mt RIGHT_ALT DEL
