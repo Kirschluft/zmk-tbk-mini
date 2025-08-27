@@ -1,0 +1,3 @@
+name: choc-sunset
+append:
+  EXTRA_CONF_FILE: choc-sunset.conf

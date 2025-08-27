@@ -1,0 +1,3 @@
+name: gazzew-u4-silent-tactile
+append:
+  EXTRA_CONF_FILE: gazzew-u4-silent-tactile.conf

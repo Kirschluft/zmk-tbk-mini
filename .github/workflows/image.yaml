@@ -1,0 +1,42 @@
+name: Update Keymap SVG
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    concurrency:
+      group: keymap_image
+      cancel-in-progress: true
+
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+
+    - name: Install Dependencies
+      run: pip install keymap-drawer
+
+    - name: Generate Keymap Image
+      run: |
+        keymap parse \
+          --zmk-keymap config/tbkmini.keymap \
+          -o keymap.yaml
+        keymap \
+          --config keymap_drawer.yaml draw \
+          --qmk-info-json config/tbkmini.json \
+          -o keymap.svg keymap.yaml
+
+    - name: Commit new Image
+      uses: stefanzweifel/git-auto-commit-action@v6
+      with:
+        commit_message: 'chore: update keymap SVG'
+        file_pattern: 'keymap.svg'
